@@ -18,14 +18,14 @@ listint_t *insert_node(listint_t **head, int number)
 		return (NULL);
 
 	add->n = number;
-	if (*head == NULL)
+	temp = *head;
+	if (temp == NULL || number < temp->n)
 	{
-		add->next = *head;
+		add->next = temp;
 		*head = add;
 		return (add);
 	}
 
-	temp = *head;
 	while (temp->next != NULL && number > temp->next->n)
 	{
 		temp = temp->next;
