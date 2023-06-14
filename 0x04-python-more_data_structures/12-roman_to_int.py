@@ -4,20 +4,22 @@ roman = dict([('I', 1), ('V', 5), ('X', 10), ('L', 50), ('C', 100), ('D', 500),
               ('XC', 90), ('CD', 400), ('CM', 900)])
 
 
-def roman_list(str):
+def roman_list(rom_str):
     lst = []
     i = 0
-    while (i < len(str)):
-        if str[i:i+2] in roman:
-            lst += [str[i:i+2]]
+    while (i < len(rom_str)):
+        if rom_str[i:i+2] in roman:
+            lst += [rom_str[i:i+2]]
             i += 2
         else:
-            lst += [str[i]]
+            lst += [rom_str[i]]
             i += 1
     return lst
 
 
 def roman_to_int(roman_string):
+    if not roman_string or type(roman_string) != str:
+        return 0
     num = 0
     lsts = roman_list(roman_string)
     for r in lsts:
