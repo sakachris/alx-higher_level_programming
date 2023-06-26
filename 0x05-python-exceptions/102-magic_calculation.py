@@ -7,6 +7,6 @@ def magic_calculation(a, b):
             else:
                 result += (a ** b)/i
         except ZeroDivisionError:
-            result += (b + a)
+            result = (b + a)
             break
     return result
