@@ -5,8 +5,8 @@ def magic_calculation(a, b):
             if (i > a):
                 raise Exception('Too far')
             else:
-                result = result + (a ** b)/i
-        except:
-            result = result + (a + b)
+                result += (a ** b)/i
+        except ZeroDivisionError:
+            result += (b + a)
             break
     return result
