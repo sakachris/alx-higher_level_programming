@@ -1,0 +1,59 @@
+=====================================
+File: 2-matrix_divided.py
+Function: matrix_divided(matrix, div)
+=====================================
+
+========================================================
+Dividing each element of a matrix by an integer or float
+Each element must be a float or integer
+Quotient is rounded off to two decimal places
+========================================================
+
+==================
+Importing function
+==================
+>>> matrix_divided = __import__('2-matrix_divided').matrix_divided
+
+===================
+Integers and Floats
+===================
+
+>>> matrix_divided([[3, 6, 9],[4, 8, 12]], 3)
+[[1.0, 2.0, 3.0], [1.33, 2.67, 4.0]]
+
+>>> matrix_divided([[3, 6.892, 9],[4, 9.99999, 12]], 10)
+[[0.3, 0.69, 0.9], [0.4, 1.0, 1.2]]
+
+>>> matrix_divided([[0, -345, 0],[0, 0, 7895]], -7)
+[[-0.0, 49.29, -0.0], [-0.0, -0.0, -1127.86]]
+
+>>> matrix_divided([[3.4, 0, 0],[0, -68, 0]], -2.3)
+[[-1.48, -0.0, -0.0], [-0.0, 29.57, -0.0]]
+
+============
+Raise Errors
+============
+
+>>> matrix_divided([[3, "six", 9],[4, 8, 12]], 3)
+Traceback (most recent call last):
+TypeError: matrix must be a matrix (list of lists) of integers/floats
+
+>>> matrix_divided([[3, 6, 9],[4, 8, "twelve"]], 3)
+Traceback (most recent call last):
+TypeError: matrix must be a matrix (list of lists) of integers/floats
+
+>>> matrix_divided([[3, 6, 9],(4, 8, 12)], 3)
+Traceback (most recent call last):
+TypeError: matrix must be a matrix (list of lists) of integers/floats
+
+>>> matrix_divided([[3, 9],[4, 8, 12]], 3)
+Traceback (most recent call last):
+TypeError: Each row of the matrix must have the same size
+
+>>> matrix_divided([[3, 6, 9],[4, 8, 12]], "three")
+Traceback (most recent call last):
+TypeError: div must be a number
+
+>>> matrix_divided([[3, 6, 9],[4, 8, 12]], 0)
+Traceback (most recent call last):
+ZeroDivisionError: division by zero

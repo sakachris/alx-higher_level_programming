@@ -1,0 +1,44 @@
+``add_integer(a, b=98)`` add two integera
+a and b are integers of float
+a and b must be first casted to integers if they are float
+Returns an integer: the addition of a and b
+
+importing function
+>>> add_integer = __import__('0-add_integer').add_integer
+
+Integers and Floats
+===================
+
+>>> add_integer(5, -5)
+0
+
+>>> add_integer(2.57, 3.63)
+5
+
+>>> add_integer(0)
+98
+
+>>> add_integer(0, 0)
+0
+
+>>> add_integer(109.9999, 1)
+110
+
+Non int or float
+================
+
+>>> add_integer("one", 2)
+Traceback (most recent call last):
+TypeError: a must be an integer
+
+>>> add_integer("one", "two")
+Traceback (most recent call last):
+TypeError: a must be an integer
+
+>>> add_integer(None)
+Traceback (most recent call last):
+TypeError: a must be an integer
+
+>>> add_integer(5, "two")
+Traceback (most recent call last):
+TypeError: b must be an integer

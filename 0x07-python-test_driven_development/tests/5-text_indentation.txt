@@ -1,0 +1,69 @@
+================================================
+File: 5-text_indentation.py
+Function : text_indentation(text)
+================================================
+
+===========================================================
+prints a text with 2 new lines after each of these characters: .?:
+text must be a string
+===========================================================
+
+==================
+Importing function
+==================
+>>> text_indentation = __import__('5-text_indentation').text_indentation
+
+===================
+with strings
+===================
+
+>>> text_indentation("""Hey. Choose: one or two. Why?""")
+Hey.
+<BLANKLINE>
+Choose:
+<BLANKLINE>
+one or two.
+<BLANKLINE>
+Why?
+<BLANKLINE>
+
+>>> text_indentation("Please come here")
+Please come here
+
+>>> text_indentation("Please.Help")
+Please.
+<BLANKLINE>
+Help
+
+>>> text_indentation("Please.  Hurry")
+Please.
+<BLANKLINE>
+Hurry
+
+>>> text_indentation(":Are you home? No.")
+:
+<BLANKLINE>
+Are you home?
+<BLANKLINE>
+No.
+<BLANKLINE>
+
+============
+Raise Errors
+============
+
+>>> text_indentation(12345)
+Traceback (most recent call last):
+TypeError: text must be a string
+
+>>> text_indentation(123.45)
+Traceback (most recent call last):
+TypeError: text must be a string
+
+>>> text_indentation(None)
+Traceback (most recent call last):
+TypeError: text must be a string
+
+>>> text_indentation()
+Traceback (most recent call last):
+TypeError: text_indentation() missing 1 required positional argument: 'text'

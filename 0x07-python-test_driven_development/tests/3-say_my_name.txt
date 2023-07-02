@@ -1,0 +1,58 @@
+================================================
+File: 3-say_my_name.py
+Function : say_my_name(first_name, last_name="")
+================================================
+
+===========================================================
+prints My name is <first name> <last name>
+Raise a TypeError(first_name or last_name must be a string)
+===========================================================
+
+==================
+Importing function
+==================
+>>> say_my_name = __import__('3-say_my_name').say_my_name
+
+===================
+with strings
+===================
+
+>>> say_my_name("David", "Charles")
+My name is David Charles
+
+>>> say_my_name("David")
+My name is David 
+
+>>> say_my_name('David'+'Charles')
+My name is DavidCharles 
+
+>>> say_my_name('    ', 'spaces')
+My name is      spaces
+
+============
+Raise Errors
+============
+
+>>> say_my_name(12, "Charles")
+Traceback (most recent call last):
+TypeError: first_name must be a string
+
+>>> say_my_name("David", 20)
+Traceback (most recent call last):
+TypeError: last_name must be a string
+
+>>> say_my_name(["David"], "Charles")
+Traceback (most recent call last):
+TypeError: first_name must be a string
+
+>>> say_my_name(None, "Charles")
+Traceback (most recent call last):
+TypeError: first_name must be a string
+
+>>> say_my_name("David", None)
+Traceback (most recent call last):
+TypeError: last_name must be a string
+
+>>> say_my_name()
+Traceback (most recent call last):
+TypeError: say_my_name() missing 1 required positional argument: 'first_name'
