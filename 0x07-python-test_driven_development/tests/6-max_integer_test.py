@@ -26,6 +26,10 @@ class TestMaxInteger(unittest.TestCase):
         self.assertEqual(max_integer([2.9, 2.999, 2.99]), 2.999)
         self.assertEqual(max_integer([-0.1, -0.01, -0.001]), -0.001)
         self.assertEqual(max_integer(['one', 'two', 'three', 'four']), 'two')
+        self.assertEqual(max_integer(('3', '1', '4', '2')), '4')
+        self.assertEqual(max_integer([{1, 2, 3}, {1, 2}]), {1, 2, 3})
+        self.assertEqual(max_integer([(1, 2, 3), (1, 2)]), (1, 2, 3))
+        self.assertEqual(max_integer('7'), '7')
 
     def test_empty(self):
         """
@@ -38,7 +42,7 @@ class TestMaxInteger(unittest.TestCase):
         """
         Test for errors
         """
-        with self.assertRaises(TypeError):
-            max_integer({1, 2, 3})
-            max_integer(1, 2, 3, 4)
-            max_integer('one', 2, 'three')
+        self.assertRaises(TypeError, max_integer, {1, 2, 3})
+        self.assertRaises(TypeError, max_integer, (1))
+        self.assertRaises(TypeError, max_integer, ['one', 2, 'three'])
+        self.assertRaises(TypeError, max_integer, 6)

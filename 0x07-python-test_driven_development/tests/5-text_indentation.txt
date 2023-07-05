@@ -27,25 +27,38 @@ one or two.
 Why?
 <BLANKLINE>
 
->>> text_indentation("Please come here")
+>>> text_indentation("		Please come here")
 Please come here
 
->>> text_indentation("Please.Help")
+>>> text_indentation("	Please.Help	")
 Please.
 <BLANKLINE>
 Help
 
->>> text_indentation("Please.  Hurry")
+>>> text_indentation("  Please.  Hurry")
 Please.
 <BLANKLINE>
 Hurry
 
->>> text_indentation(":Are you home? No.")
+>>> text_indentation(" Please.				Hurry ")
+Please.
+<BLANKLINE>
+Hurry
+
+>>> text_indentation(":Are you home? No. ")
 :
 <BLANKLINE>
 Are you home?
 <BLANKLINE>
 No.
+<BLANKLINE>
+
+>>> text_indentation("  :     .       ?   ")
+:
+<BLANKLINE>
+.
+<BLANKLINE>
+?
 <BLANKLINE>
 
 ============

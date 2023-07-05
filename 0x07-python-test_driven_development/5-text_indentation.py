@@ -21,7 +21,12 @@ def text_indentation(text):
             text2 += c
     text3 = ""
     for i, t in enumerate(text2):
-        if t == ' ' and text2[i-1] == '\n':
+        if t == ' ' and (text2[i-1] in ['\n', ' ']):
+            continue
+        if (i+1) < len(text2):
+            if t == ' ' and (text2[i+1] in [' ']):
+                continue
+        if t == ' ' and (i == len(text2)-1):
             continue
         text3 += t
 
