@@ -46,3 +46,7 @@ TypeError: b must be an integer
 >>> add_integer(float('int'), 5)
 Traceback (most recent call last):
 ValueError: could not convert string to float: 'int'
+
+>>> add_integer(float('NaN'), float('NaN'))
+Traceback (most recent call last):
+ValueError: cannot convert float NaN to integer
