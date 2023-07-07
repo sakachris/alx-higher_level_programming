@@ -43,7 +43,7 @@ TypeError: a must be an integer
 Traceback (most recent call last):
 TypeError: b must be an integer
 
->>> add_integer(float('int'), 5)
+>>> add_integer(float('int'), float('int'))
 Traceback (most recent call last):
 ValueError: could not convert string to float: 'int'
 
