@@ -43,9 +43,9 @@ TypeError: a must be an integer
 Traceback (most recent call last):
 TypeError: b must be an integer
 
->>> add_integer(float('int'), float('int'))
+>>> add_integer(float('inf'), 5)
 Traceback (most recent call last):
-ValueError: could not convert string to float: 'int'
+OverflowError: cannot convert float infinity to integer
 
 >>> add_integer(float('NaN'), float('NaN'))
 Traceback (most recent call last):
