@@ -1,0 +1,54 @@
+================================================
+File: 7-base_geometry.py
+Function : integer_validator(self, name, value)
+================================================
+
+===========================================================
+validates the value
+===========================================================
+
+==================
+Importing Class
+==================
+>>> BaseGeometry = __import__('7-base_geometry').BaseGeometry
+
+===================
+Instances
+===================
+>>> bg = BaseGeometry()
+>>> 
+============================
+Tests without errors
+============================
+>>> bg.integer_validator("ten", 10)
+>>> bg.integer_validator("hundred", 100)
+
+
+============
+Raise Errors
+============
+
+>>> bg.integer_validator("nten", -10)
+Traceback (most recent call last):
+ValueError: nten must be greater than 0
+
+>>> bg.integer_validator("zero", 0)
+Traceback (most recent call last):
+ValueError: zero must be greater than 0
+
+>>> bg.integer_validator("ten", "ten")
+Traceback (most recent call last):
+TypeError: ten must be an integer
+
+>>> bg.integer_validator("nten")
+Traceback (most recent call last):
+TypeError: integer_validator() missing 1 required positional argument: 'value'
+
+>>> bg.integer_validator()
+Traceback (most recent call last):
+TypeError: integer_validator() missing 2 required positional arguments: 'name' and 'value'
+
+>>> bg.integer_validator("ften", 10.1)
+Traceback (most recent call last):
+TypeError: ften must be an integer
+
