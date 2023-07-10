@@ -51,6 +51,11 @@ Tests without errors
 >>> lst4.print_sorted()
 [-3, 0, 1, 4]
 
+>>> lst5
+[]
+>>> lst5.print_sorted()
+[]
+
 ============
 Raise Errors
 ============
