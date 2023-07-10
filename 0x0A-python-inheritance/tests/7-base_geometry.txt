@@ -22,7 +22,10 @@ Tests without errors
 ============================
 >>> bg.integer_validator("ten", 10)
 >>> bg.integer_validator("hundred", 100)
-
+>>> bg.integer_validator("two", (2))
+>>> bg.integer_validator(10, 10)
+>>> bg.integer_validator([2, 4], 13)
+>>> bg.integer_validator(-80, 1)
 
 ============
 Raise Errors
@@ -51,4 +54,12 @@ TypeError: integer_validator() missing 2 required positional arguments: 'name' a
 >>> bg.integer_validator("ften", 10.1)
 Traceback (most recent call last):
 TypeError: ften must be an integer
+
+>>> bg.integer_validator("nten", -8.452)
+Traceback (most recent call last):
+TypeError: nten must be an integer
+
+>>> bg.integer_validator("nten", (1, 2))
+Traceback (most recent call last):
+TypeError: nten must be an integer
 
