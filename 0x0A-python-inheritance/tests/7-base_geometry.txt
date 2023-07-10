@@ -63,3 +63,11 @@ TypeError: nten must be an integer
 Traceback (most recent call last):
 TypeError: nten must be an integer
 
+>>> bg.integer_validator("none", None)
+Traceback (most recent call last):
+TypeError: none must be an integer
+
+>>> bg.integer_validator("object", object)
+Traceback (most recent call last):
+TypeError: object must be an integer
+
