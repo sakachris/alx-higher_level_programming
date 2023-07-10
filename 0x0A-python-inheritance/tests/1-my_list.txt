@@ -62,6 +62,12 @@ Tests without errors
 >>> lst6.print_sorted()
 [6]
 
+>>> lst7.extend([2, 2, 2, 2])
+>>> lst7
+[2, 2, 2, 2]
+>>> lst7.print_sorted()
+[2, 2, 2, 2]
+
 ============
 Raise Errors
 ============
