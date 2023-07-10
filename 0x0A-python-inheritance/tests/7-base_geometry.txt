@@ -71,3 +71,11 @@ TypeError: none must be an integer
 Traceback (most recent call last):
 TypeError: object must be an integer
 
+>>> bg.integer_validator("true", True)
+Traceback (most recent call last):
+TypeError: true must be an integer
+
+>>> bg.integer_validator("false", False)
+Traceback (most recent call last):
+TypeError: false must be an integer
+
