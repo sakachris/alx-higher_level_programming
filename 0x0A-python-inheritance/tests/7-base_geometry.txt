@@ -17,6 +17,13 @@ Instances
 ===================
 >>> bg = BaseGeometry()
 >>> 
+
+===================
+Check documentation
+===================
+>>> __import__("7-base_geometry").__doc__
+'\nmodule for Geometry classes\n'
+
 ============================
 Tests without errors
 ============================
