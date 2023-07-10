@@ -56,6 +56,12 @@ Tests without errors
 >>> lst5.print_sorted()
 []
 
+>>> lst6.append(6)
+>>> lst6
+[6]
+>>> lst6.print_sorted()
+[6]
+
 ============
 Raise Errors
 ============
