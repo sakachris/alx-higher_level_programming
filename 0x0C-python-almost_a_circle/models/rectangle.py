@@ -75,10 +75,22 @@ class Rectangle(Base):
 
     def display(self):
         """ prints the rectangle to stdout """
+        for m in range(self.y):
+            print("")
         for i in range(self.height):
+            for k in range(self.x):
+                print(" ", end="")
             for j in range(self.width):
                 print("#", end='')
             print()
 
     def __str__(self):
-        return f"[{__class__.__name__}] ({self.id}) {self.x}/{self.y} - {self.width}/{self.height}"
+        return ("[{}] ({}) {}/{} - {}/{}"
+                .format(__class__.__name__, self.id, self.x, self.y,
+                        self.width, self.height))
+
+    def update(self, *args):
+        """ Updates Rectangle class arguments """
+        ar = ['id', 'width', 'height', 'x', 'y']
+        for var, val in zip(ar, args):
+            setattr(self, var, val)
