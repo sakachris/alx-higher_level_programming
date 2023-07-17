@@ -31,7 +31,7 @@ class Base:
         """ writes the JSON string to a file """
         filename = f"{cls.__name__}.json"
         dict_list = []
-        if list_objs is not None or len(list_objs) != 0:
+        if list_objs is not None:
             for objs in list_objs:
                 dict_list.append(objs.to_dictionary())
         with open(filename, mode='w', encoding='UTF-8') as file:
