@@ -15,6 +15,7 @@ class TestBase(unittest.TestCase):
     Testing for Base Class
     """
     def setUp(self):
+        Base._Base__nb_objects = 0
         self.r1 = Rectangle(10, 5, 2, 1)
         self.r2 = Rectangle(4, 4, 1, 4, 9)
         self.r3 = Rectangle(3, 2, 2, 1)
@@ -42,9 +43,9 @@ class TestBase(unittest.TestCase):
         """
         Testing id
         """
-        self.assertEqual(self.r1.id, 16)
+        self.assertEqual(self.r1.id, 1)
         self.assertEqual(self.r2.id, 9)
-        self.assertEqual(self.r3.id, 17)
+        self.assertEqual(self.r3.id, 2)
 
     def test_validation(self):
         """ Test attribute validation """
@@ -65,10 +66,12 @@ class TestBase(unittest.TestCase):
         with self.assertRaises(ValueError):
             Rectangle(8, 4, 0, -10)
 
-    def test_less_param(self):
-        """ Test when 0 or 1 parameter passes """
+    def test_less_excess_param(self):
+        """ Test when 0 or 1 or excess parameters passed """
         with self.assertRaises(TypeError):
             Rectangle(3)
+        with self.assertRaises(TypeError):
+            Rectangle(1, 2, 3, 4, 5, 6)
         with self.assertRaises(TypeError):
             Rectangle()
 
@@ -96,9 +99,9 @@ class TestBase(unittest.TestCase):
 
     def test_str(self):
         """ Tests __str__ return value """
-        r1s = "[Rectangle] (24) 2/1 - 10/5"
+        r1s = "[Rectangle] (1) 2/1 - 10/5"
         r2s = "[Rectangle] (9) 1/4 - 4/4"
-        r3s = "[Rectangle] (25) 2/1 - 3/2"
+        r3s = "[Rectangle] (2) 2/1 - 3/2"
         self.assertEqual(str(self.r1), r1s)
         self.assertEqual(str(self.r2), r2s)
         self.assertEqual(str(self.r3), r3s)
@@ -106,7 +109,7 @@ class TestBase(unittest.TestCase):
     def test_update(self):
         """ Tests update of the arguments """
         self.r4 = Rectangle(1, 2, 3, 4)
-        r4s = "[Rectangle] (30) 3/4 - 1/2"
+        r4s = "[Rectangle] (3) 3/4 - 1/2"
         self.assertEqual(str(self.r4), r4s)
         self.r4.update(20)
         r4u1 = "[Rectangle] (20) 3/4 - 1/2"
@@ -123,3 +126,18 @@ class TestBase(unittest.TestCase):
         self.r4.update(5, 10, 15, 20, 25)
         r4u5 = "[Rectangle] (5) 20/25 - 10/15"
         self.assertEqual(str(self.r4), r4u5)
+
+    def test_update2(self):
+        """ Tests update of the arguments """
+        self.r5 = Rectangle(1, 1, 1, 1)
+        r5s = "[Rectangle] (3) 1/1 - 1/1"
+        self.assertEqual(str(self.r5), r5s)
+        self.r5.update(x=3, height=10)
+        r5u1 = "[Rectangle] (3) 3/1 - 1/10"
+        self.assertEqual(str(self.r5), r5u1)
+        self.r5.update(14, 15, x=13, height=11)
+        r5u2 = "[Rectangle] (14) 3/1 - 15/10"
+        self.assertEqual(str(self.r5), r5u2)
+        self.r5.update(x=3, height=15, y=5, id=100, width=20)
+        r5u3 = "[Rectangle] (100) 3/5 - 20/15"
+        self.assertEqual(str(self.r5), r5u3)
