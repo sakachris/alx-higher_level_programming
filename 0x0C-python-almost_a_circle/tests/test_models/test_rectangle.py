@@ -4,6 +4,7 @@ test_models/rectangle.py for testing Rectangle class
 """
 import unittest
 import io
+import os
 from contextlib import redirect_stdout
 from models.rectangle import Rectangle
 from models.base import Base
@@ -160,3 +161,8 @@ class TestBase(unittest.TestCase):
         js = Base.to_json_string([self.r1.to_dictionary()])
         self.assertEqual(js, r1j)
         self.assertIsInstance(js, str)
+
+    def test_save_to_file(self):
+        """ Tests saving to json file """
+        Rectangle.save_to_file([self.r1, self.r2])
+        self.assertTrue(os.path.isfile('Rectangle.json'))

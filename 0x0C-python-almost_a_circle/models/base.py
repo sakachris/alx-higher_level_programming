@@ -3,6 +3,7 @@
 base module for the Base class
 """
 import json
+import csv
 
 
 class Base:
@@ -30,7 +31,7 @@ class Base:
         """ writes the JSON string to a file """
         filename = f"{cls.__name__}.json"
         dict_list = []
-        if list_objs is not None:
+        if list_objs is not None or len(list_objs) != 0:
             for objs in list_objs:
                 dict_list.append(objs.to_dictionary())
         with open(filename, mode='w', encoding='UTF-8') as file:
@@ -57,6 +58,39 @@ class Base:
         try:
             with open(filename, encoding='UTF-8') as file:
                 dict_list = cls.from_json_string(file.read())
+        except IOError:
+            return []
+        instances = []
+        for dct in dict_list:
+            instances.append(cls.create(**dct))
+        return instances
+
+    @classmethod
+    def save_to_file_csv(cls, list_objs):
+        """ serializes class object to CSV """
+        filename = f"{cls.__name__}.csv"
+        with open(filename, 'w', newline='') as file:
+            if cls.__name__ == "Rectangle":
+                fieldnames = ['id', 'width', 'height', 'x', 'y']
+            elif cls.__name__ == "Square":
+                fieldnames = ['id', 'size', 'x', 'y']
+            writer = csv.DictWriter(file, fieldnames=fieldnames)
+            writer.writeheader()
+            for objs in list_objs:
+                writer.writerow(objs.to_dictionary())
+
+    @classmethod
+    def load_from_file_csv(cls):
+        """ deserializes csv to class object """
+        filename = f"{cls.__name__}.csv"
+        dict_list = []
+        try:
+            with open(filename, newline='') as file:
+                reader = csv.DictReader(file)
+                for row in reader:
+                    for var, val in row.items():
+                        row[var] = int(val)
+                    dict_list.append(row)
         except IOError:
             return []
         instances = []
