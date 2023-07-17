@@ -25,6 +25,7 @@ class TestBase(unittest.TestCase):
         self.assertTrue(len(Square.__doc__) >= 20, "Short doc")
         self.assertTrue(len(Square.display.__doc__) >= 20, "Short doc")
         self.assertTrue(len(Square.update.__doc__) >= 20, "Short doc")
+        self.assertTrue(len(Square.to_dictionary.__doc__) >= 20, "Short doc")
 
     def test_pycodestyle(self):
         pystyle = pycodestyle.StyleGuide(quiet=True)
@@ -136,3 +137,20 @@ class TestBase(unittest.TestCase):
         self.s5.update(x=3, size=15, y=5, id=100)
         s5u3 = "[Square] (100) 3/5 - 15"
         self.assertEqual(str(self.s5), s5u3)
+
+    def test_to_dictionary(self):
+        """ Tests dictionary of instances """
+        s1d = {'size': 10, 'x': 5, 'y': 2, 'id': 11}
+        self.assertDictEqual(self.s1.to_dictionary(), s1d)
+        s2d = {'size': 4, 'x': 4, 'y': 1, 'id': 1}
+        self.assertDictEqual(self.s2.to_dictionary(), s2d)
+        self.s6 = Square(50)
+        s6d = {'size': 50, 'x': 0, 'y': 0, 'id': 3}
+        self.assertDictEqual(self.s6.to_dictionary(), s6d)
+
+    def test_to_json_string(self):
+        """ Tests conversion of dict to list of json string """
+        s1j = '[{"size": 10, "x": 5, "y": 2, "id": 11}]'
+        js = Base.to_json_string([self.s1.to_dictionary()])
+        self.assertEqual(js, s1j)
+        self.assertIsInstance(js, str)

@@ -25,6 +25,8 @@ class TestBase(unittest.TestCase):
         self.assertTrue(len(Rectangle.area.__doc__) >= 20, "Short doc")
         self.assertTrue(len(Rectangle.display.__doc__) >= 20, "Short doc")
         self.assertTrue(len(Rectangle.update.__doc__) >= 20, "Short doc")
+        self.assertTrue(len(Rectangle.to_dictionary.__doc__) >= 20, "Short")
+        self.assertTrue(len(Rectangle.to_json_string.__doc__) >= 20, "Short")
 
     def test_pycodestyle(self):
         pystyle = pycodestyle.StyleGuide(quiet=True)
@@ -141,3 +143,20 @@ class TestBase(unittest.TestCase):
         self.r5.update(x=3, height=15, y=5, id=100, width=20)
         r5u3 = "[Rectangle] (100) 3/5 - 20/15"
         self.assertEqual(str(self.r5), r5u3)
+
+    def test_to_dictionary(self):
+        """ Tests dictionary of instances """
+        r1d = {'width': 10, 'height': 5, 'x': 2, 'y': 1, 'id': 1}
+        self.assertDictEqual(self.r1.to_dictionary(), r1d)
+        r2d = {'width': 4, 'height': 4, 'x': 1, 'y': 4, 'id': 9}
+        self.assertDictEqual(self.r2.to_dictionary(), r2d)
+        self.r6 = Rectangle(30, 40)
+        r6d = {'width': 30, 'height': 40, 'x': 0, 'y': 0, 'id': 3}
+        self.assertDictEqual(self.r6.to_dictionary(), r6d)
+
+    def test_to_json_string(self):
+        """ Tests conversion of dict to list of json string """
+        r1j = '[{"width": 10, "height": 5, "x": 2, "y": 1, "id": 1}]'
+        js = Base.to_json_string([self.r1.to_dictionary()])
+        self.assertEqual(js, r1j)
+        self.assertIsInstance(js, str)
