@@ -33,7 +33,7 @@ class Base:
         if list_objs is not None:
             for objs in list_objs:
                 dict_list.append(objs.to_dictionary())
-        with open(filename, 'w') as file:
+        with open(filename, mode='w', encoding='UTF-8') as file:
             file.write(cls.to_json_string(dict_list))
 
     @staticmethod
