@@ -4,6 +4,7 @@ test_models/rectangle.py for testing Rectangle class
 """
 import unittest
 import io
+import os
 from contextlib import redirect_stdout
 from models.square import Square
 from models.rectangle import Rectangle
@@ -66,6 +67,19 @@ class TestBase(unittest.TestCase):
             Square(4, 2, '0')
         with self.assertRaises(ValueError):
             Square(8, 4, -10)
+
+    def test_validation_2(self):
+        """ Test attribute validation """
+        with self.assertRaises(TypeError):
+            Square("1")
+        with self.assertRaises(TypeError):
+            Square(1, "7")
+        with self.assertRaises(ValueError):
+            Square(-4)
+        with self.assertRaises(ValueError):
+            Square(5, -5)
+        with self.assertRaises(ValueError):
+            Square(0)
 
     def test_less_excess_param(self):
         """ Test when 0 or 1 or more parameters passed """
@@ -154,3 +168,51 @@ class TestBase(unittest.TestCase):
         js = Base.to_json_string([self.s1.to_dictionary()])
         self.assertEqual(js, s1j)
         self.assertIsInstance(js, str)
+
+    def test_create_1(self):
+        r = Square.create(**{'id': 89})
+        rs = '[Square] (89) 1/0 - 1'
+        self.assertEqual(str(r), rs)
+
+    def test_create_2(self):
+        r = Square.create(**{'id': 89, 'size': 1})
+        rs = '[Square] (89) 1/0 - 1'
+        self.assertEqual(str(r), rs)
+
+    def test_create_3(self):
+        r = Square.create(**{'id': 89, 'size': 1,
+                             'x': 2, 'y': 3})
+        rs = '[Square] (89) 2/3 - 1'
+        self.assertEqual(str(r), rs)
+
+    def test_create_4(self):
+        r = Square.create(**{'id': 89, 'size': 1, 'x': 2})
+        rs = '[Square] (89) 2/0 - 1'
+        self.assertEqual(str(r), rs)
+
+    def test_save_to_file(self):
+        """ Tests saving to json file """
+        Square.save_to_file(None)
+        self.assertTrue(os.path.isfile('Square.json'))
+        with open('Square.json') as file:
+            self.assertEqual(file.read(), '[]')
+
+    def test_save_to_file_2(self):
+        """ Tests saving to json file """
+        Square.save_to_file([])
+        self.assertTrue(os.path.isfile('Square.json'))
+        with open('Square.json') as file:
+            self.assertEqual(file.read(), '[]')
+
+    def test_save_to_file_3(self):
+        """ Tests saving to json file """
+        Square.save_to_file([Square(1)])
+        self.assertTrue(os.path.isfile('Square.json'))
+        r = '[{"size": 1, "x": 0, "y": 0, "id": 3}]'
+        with open('Square.json') as file:
+            self.assertEqual(file.read(), r)
+
+    def test_load_from_file(self):
+        output = Square.load_from_file()
+        for out in output:
+            self.assertEqual(str(out), '[Square] (3) 0/0 - 1')

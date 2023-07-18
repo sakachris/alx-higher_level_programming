@@ -69,6 +69,25 @@ class TestBase(unittest.TestCase):
         with self.assertRaises(ValueError):
             Rectangle(8, 4, 0, -10)
 
+    def test_validation2(self):
+        """ Test attribute validation """
+        with self.assertRaises(TypeError):
+            Rectangle("1", 2)
+        with self.assertRaises(TypeError):
+            Rectangle(1, "2")
+        with self.assertRaises(TypeError):
+            Rectangle(2, 3, "4")
+        with self.assertRaises(ValueError):
+            Rectangle(4, -7)
+        with self.assertRaises(ValueError):
+            Rectangle(-3, 2)
+        with self.assertRaises(ValueError):
+            Rectangle(0, 8)
+        with self.assertRaises(ValueError):
+            Rectangle(4, 0)
+        with self.assertRaises(ValueError):
+            Rectangle(8, 4, -7)
+
     def test_less_excess_param(self):
         """ Test when 0 or 1 or excess parameters passed """
         with self.assertRaises(TypeError):
@@ -99,6 +118,24 @@ class TestBase(unittest.TestCase):
         with redirect_stdout(f):
             self.r3.display()
         self.assertEqual(f.getvalue(), r3d)
+
+    def test_display_3(self):
+        """ Tests printing of rectangle """
+        r7 = Rectangle(4, 4)
+        r7d = "####\n####\n####\n####\n"
+        f = io.StringIO()
+        with redirect_stdout(f):
+            r7.display()
+        self.assertEqual(f.getvalue(), r7d)
+
+    def test_display_4(self):
+        """ Tests printing of rectangle """
+        r8 = Rectangle(3, 2)
+        r8d = "###\n###\n"
+        f = io.StringIO()
+        with redirect_stdout(f):
+            r8.display()
+        self.assertEqual(f.getvalue(), r8d)
 
     def test_str(self):
         """ Tests __str__ return value """
@@ -166,3 +203,39 @@ class TestBase(unittest.TestCase):
         """ Tests saving to json file """
         Rectangle.save_to_file([self.r1, self.r2])
         self.assertTrue(os.path.isfile('Rectangle.json'))
+
+    def test_save_to_file_2(self):
+        """ Tests saving to json file """
+        Rectangle.save_to_file([])
+        self.assertTrue(os.path.isfile('Rectangle.json'))
+        with open('Rectangle.json') as file:
+            self.assertEqual(file.read(), '[]')
+
+    def test_save_to_file_3(self):
+        """ Tests saving to json file """
+        Rectangle.save_to_file([Rectangle(1, 2)])
+        self.assertTrue(os.path.isfile('Rectangle.json'))
+        r = '[{"width": 1, "height": 2, "x": 0, "y": 0, "id": 3}]'
+        with open('Rectangle.json') as file:
+            self.assertEqual(file.read(), r)
+
+    def test_load_from_file(self):
+        output = Rectangle.load_from_file()
+        for out in output:
+            self.assertEqual(str(out), '[Rectangle] (3) 0/0 - 1/2')
+
+    def test_create_1(self):
+        r = Rectangle.create(**{'id': 89})
+        rs = '[Rectangle] (89) 0/0 - 1/1'
+        self.assertEqual(str(r), rs)
+
+    def test_create_2(self):
+        r = Rectangle.create(**{'id': 89, 'width': 1, 'height': 2})
+        rs = '[Rectangle] (89) 0/0 - 1/2'
+        self.assertEqual(str(r), rs)
+
+    def test_create_3(self):
+        r = Rectangle.create(**{'id': 89, 'width': 1,
+                             'height': 2, 'x': 3, 'y': 4})
+        rs = '[Rectangle] (89) 3/4 - 1/2'
+        self.assertEqual(str(r), rs)
