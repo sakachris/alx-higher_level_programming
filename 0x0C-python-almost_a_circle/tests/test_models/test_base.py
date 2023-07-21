@@ -15,6 +15,7 @@ class TestBase(unittest.TestCase):
     Testing for Base Class
     """
     def test_documentation(self):
+        """ tests for documentation """
         self.assertTrue(len(Base.__doc__) >= 20, "Short or no documentation")
         self.assertTrue(len(Base.to_json_string.__doc__) >= 20, "Short doc")
         self.assertTrue(len(Base.save_to_file.__doc__) >= 20, "Short doc")
@@ -24,6 +25,7 @@ class TestBase(unittest.TestCase):
         self.assertTrue(len(Base.save_to_file_csv.__doc__) >= 20, "Short doc")
 
     def test_pycodestyle(self):
+        """ tests for pycodestyle """
         pystyle = pycodestyle.StyleGuide(quiet=True)
         result = pystyle.check_files(['models/base.py',
                                      'tests/test_models/test_base.py'])
@@ -31,6 +33,7 @@ class TestBase(unittest.TestCase):
                          "Found code style errors (and warnings).")
 
     def test_instance(self):
+        """ tests for instance """
         base1 = Base()
         self.assertIsInstance(base1, Base, "Not instance of Base")
 

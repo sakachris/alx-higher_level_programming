@@ -17,18 +17,21 @@ class TestBase(unittest.TestCase):
     Testing for Base Class
     """
     def setUp(self):
+        """ creating setup method """
         Base._Base__nb_objects = 0
         self.s1 = Square(10, 5, 2, 11)
         self.s2 = Square(4, 4, 1)
         self.s3 = Square(3, 2, 2)
 
     def test_documentation(self):
+        """ testing documentation """
         self.assertTrue(len(Square.__doc__) >= 20, "Short doc")
         self.assertTrue(len(Square.display.__doc__) >= 20, "Short doc")
         self.assertTrue(len(Square.update.__doc__) >= 20, "Short doc")
         self.assertTrue(len(Square.to_dictionary.__doc__) >= 20, "Short doc")
 
     def test_pycodestyle(self):
+        """ testing pycodestyle """
         pystyle = pycodestyle.StyleGuide(quiet=True)
         result = pystyle.check_files(['models/square.py',
                                      'tests/test_models/test_square.py'])
@@ -36,9 +39,11 @@ class TestBase(unittest.TestCase):
                          "Found code style errors (and warnings).")
 
     def test_instance(self):
+        """ testing instance """
         self.assertIsInstance(self.s1, Square, "Not instance of Square")
 
     def test_subclass(self):
+        """ testing subclass """
         self.assertTrue(issubclass(Square, Rectangle))
 
     def test_id(self):
@@ -170,22 +175,26 @@ class TestBase(unittest.TestCase):
         self.assertIsInstance(js, str)
 
     def test_create_1(self):
+        """ tests creating an instance using create """
         r = Square.create(**{'id': 89})
         rs = '[Square] (89) 1/0 - 1'
         self.assertEqual(str(r), rs)
 
     def test_create_2(self):
+        """ tests creating an instance using create """
         r = Square.create(**{'id': 89, 'size': 1})
         rs = '[Square] (89) 1/0 - 1'
         self.assertEqual(str(r), rs)
 
     def test_create_3(self):
+        """ tests creating an instance using create """
         r = Square.create(**{'id': 89, 'size': 1,
                              'x': 2, 'y': 3})
         rs = '[Square] (89) 2/3 - 1'
         self.assertEqual(str(r), rs)
 
     def test_create_4(self):
+        """ tests creating an instance using create """
         r = Square.create(**{'id': 89, 'size': 1, 'x': 2})
         rs = '[Square] (89) 2/0 - 1'
         self.assertEqual(str(r), rs)
@@ -213,6 +222,7 @@ class TestBase(unittest.TestCase):
             self.assertEqual(file.read(), r)
 
     def test_load_from_file(self):
+        """ testing loading from file """
         output = Square.load_from_file()
         for out in output:
             self.assertEqual(str(out), '[Square] (3) 0/0 - 1')

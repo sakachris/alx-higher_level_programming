@@ -11,18 +11,22 @@ class Square(Rectangle):
     Square class inheriting Rectangle class
     """
     def __init__(self, size, x=0, y=0, id=None):
+        """ initializing square class """
         super().__init__(size, size, x, y, id)
 
     @property
     def size(self):
+        """ setting property for size """
         return self.width
 
     @size.setter
     def size(self, value):
+        """ getting the value for size """
         self.width = value
         self.height = value
 
     def __str__(self):
+        """ implementing string output """
         return ("[{}] ({}) {}/{} - {}"
                 .format(__class__.__name__, self.id, self.x, self.y,
                         self.size))
@@ -40,7 +44,7 @@ class Square(Rectangle):
     def to_dictionary(self):
         """ returns dictionary of a class instance """
         keys = ['size', 'x', 'y', 'id']
-        dt = self.__dict__
-        del (dt['_Rectangle__height'])
+        dta = self.__dict__
+        dt = {k: v for k, v in dta.items() if not k.endswith('height')}
         dct = dict(zip(keys, list(dt.values())))
         return dct

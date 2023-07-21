@@ -4,6 +4,7 @@ base module for the Base class
 """
 import json
 import csv
+import turtle
 
 
 class Base:
@@ -13,6 +14,7 @@ class Base:
     __nb_objects = 0
 
     def __init__(self, id=None):
+        """ initializing base class """
         if id is None:
             Base.__nb_objects += 1
             self.id = Base.__nb_objects
@@ -97,3 +99,39 @@ class Base:
         for dct in dict_list:
             instances.append(cls.create(**dct))
         return instances
+
+    @staticmethod
+    def draw(list_rectangles, list_squares):
+        """ opens a window and draws all the Rectangles and Squares """
+        s = turtle.Screen()
+        t = turtle.Turtle()
+        t.speed(2)
+        t.pensize(5)
+        t.color('blue', 'pink')
+        t.penup()
+        for re in list_rectangles:
+            t.goto((re.width + 10), (re.height + 10))
+            t.pendown()
+            t.begin_fill()
+            for i in range(2):
+                t.fd(re.width)
+                t.lt(90)
+                t.fd(re.height)
+                t.lt(90)
+            t.penup()
+            t.end_fill()
+
+        t.color('red', 'green')
+        for sq in list_squares:
+            t.goto((sq.width - 200), (sq.height - 200))
+            t.pendown()
+            t.begin_fill()
+            for i in range(2):
+                t.fd(sq.width)
+                t.lt(90)
+                t.fd(sq.height)
+                t.lt(90)
+            t.ht()
+            t.penup()
+            t.end_fill()
+        s.exitonclick()

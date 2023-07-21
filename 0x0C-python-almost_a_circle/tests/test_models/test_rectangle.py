@@ -16,12 +16,14 @@ class TestBase(unittest.TestCase):
     Testing for Base Class
     """
     def setUp(self):
+        """ setup method """
         Base._Base__nb_objects = 0
         self.r1 = Rectangle(10, 5, 2, 1)
         self.r2 = Rectangle(4, 4, 1, 4, 9)
         self.r3 = Rectangle(3, 2, 2, 1)
 
     def test_documentation(self):
+        """ tests for documentation """
         self.assertTrue(len(Rectangle.__doc__) >= 20, "Short doc")
         self.assertTrue(len(Rectangle.area.__doc__) >= 20, "Short doc")
         self.assertTrue(len(Rectangle.display.__doc__) >= 20, "Short doc")
@@ -30,6 +32,7 @@ class TestBase(unittest.TestCase):
         self.assertTrue(len(Rectangle.to_json_string.__doc__) >= 20, "Short")
 
     def test_pycodestyle(self):
+        """ tests for pycodestyle """
         pystyle = pycodestyle.StyleGuide(quiet=True)
         result = pystyle.check_files(['models/rectangle.py',
                                      'tests/test_models/test_rectangle.py'])
@@ -37,9 +40,11 @@ class TestBase(unittest.TestCase):
                          "Found code style errors (and warnings).")
 
     def test_instance(self):
+        """ tests for instance """
         self.assertIsInstance(self.r1, Rectangle, "Not instance of Rectangle")
 
     def test_subclass(self):
+        """ tests for subclass """
         self.assertTrue(issubclass(Rectangle, Base))
 
     def test_id(self):
@@ -220,21 +225,25 @@ class TestBase(unittest.TestCase):
             self.assertEqual(file.read(), r)
 
     def test_load_from_file(self):
+        """ tests loading from file """
         output = Rectangle.load_from_file()
         for out in output:
             self.assertEqual(str(out), '[Rectangle] (3) 0/0 - 1/2')
 
     def test_create_1(self):
+        """ tests creating an instance using create """
         r = Rectangle.create(**{'id': 89})
         rs = '[Rectangle] (89) 0/0 - 1/1'
         self.assertEqual(str(r), rs)
 
     def test_create_2(self):
+        """ tests creating an instance using create """
         r = Rectangle.create(**{'id': 89, 'width': 1, 'height': 2})
         rs = '[Rectangle] (89) 0/0 - 1/2'
         self.assertEqual(str(r), rs)
 
     def test_create_3(self):
+        """ tests creating an instance using create """
         r = Rectangle.create(**{'id': 89, 'width': 1,
                              'height': 2, 'x': 3, 'y': 4})
         rs = '[Rectangle] (89) 3/4 - 1/2'
