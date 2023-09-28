@@ -1,3 +1,3 @@
 #!/usr/bin/bash
 # Bash script that takes in a URL and diplays size
-curl -s -o /dev/null -w "%{size_download}" $1
+curl -sI $1 | grep "Content-Length" | cut -d " " -f2
