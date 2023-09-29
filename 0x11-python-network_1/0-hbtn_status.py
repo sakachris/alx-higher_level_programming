@@ -2,10 +2,11 @@
 """
 module that fetches status
 """
-from urllib.request import urlopen
+# from urllib.request import urlopen
+import urllib.request
 
 
-with urlopen('https://alx-intranet.hbtn.io/status') as response:
+with urllib.request.urlopen('https://alx-intranet.hbtn.io/status') as response:
     content = response.read()
     utf = content.decode('utf-8')
     print("Body response:")
